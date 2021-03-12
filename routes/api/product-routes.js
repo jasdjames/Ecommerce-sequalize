@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// const { json } = require('sequelize/types');
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
@@ -24,7 +23,6 @@ Product.findByPk(req.params.id, {
 include: [{ model: Category, Tag}]
 }).then((product) => res.json(product)); 
 
-  
 
 });
 
@@ -111,7 +109,7 @@ router.delete('/:id', async (req, res) => {
     }
   }).then((product) => {
 
-    return;
+    res.json(product)
   })
 });
 

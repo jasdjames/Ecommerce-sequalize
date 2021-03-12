@@ -14,10 +14,9 @@ Category.findAll({ include:[Product]
 router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
-Category.findByPk(req.params.id,{
+Category.findByPk(req.params.id, {
   include: [{ model: Product}]
-}).then((category) => res.json(category))
-
+}).then((category) => res.json(category));
 });
 
 router.post('/', (req, res) => {
@@ -44,6 +43,17 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
+  Category.destroy({
+    where: {
+
+      id: req.params.id
+    }
+  }).then((category) => {
+
+    res.json(category)
+  })
 });
+
+
 
 module.exports = router;
