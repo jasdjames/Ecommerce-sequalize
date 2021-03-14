@@ -6,32 +6,51 @@ const { Tag, Product, ProductTag } = require('../../models');
 router.get('/', (req, res) => {
   // find all tags
   // be sure to include its associated Product data
-  ProductTag.findAll({
+  Tag.findAll({
   include: [{ model: Product}]
 
 
-  }). then ((productTag) => res.json(productTag))
+  }).then((productTag) => res.json(productTag))
 });
 
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
-  ProductTag.findByPk(req.params.id, {
+  Tag.findByPk(req.params.id, {
     include: [{ model: Product}]
   }).then((productTag) => res.json(productTag)); 
 });
 
 router.post('/', (req, res) => {
   // create a new tag
-  ProductTag.create(req.body)
+  Tag.create(req.body)
+    .then((tag)=> res.json(tag))
+
 });
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
+  Tag.update (req.body, {
+    where:{
+       id: req.params.id,
+      },
+    
+
+  }).then((tag) => res.json(tag))
 });
 
 router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
+  Tag.destroy({
+    where: {
+
+      id: req.params.id
+    }
+  }).then((productTag) => {
+
+    res.json(productTag)
+  })
+  
 });
 
 module.exports = router;

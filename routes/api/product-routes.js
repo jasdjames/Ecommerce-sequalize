@@ -1,4 +1,5 @@
 const router = require('express').Router();
+
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
@@ -23,6 +24,7 @@ Product.findByPk(req.params.id, {
 include: [{ model: Category, Tag}]
 }).then((product) => res.json(product)); 
 
+  
 
 });
 

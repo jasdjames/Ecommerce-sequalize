@@ -24,21 +24,19 @@ router.post('/', (req, res) => {
 Category.create(req.body)
 .then((category) => res.json(category)
 
-// {
-
-// if 
-
-
-
-// }
-
-
-
 ) 
 });
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
+  Category.update (req.body, {
+    
+    where: {
+      id: req.params.id,
+    },
+
+  }).then((category) => res.json(category))
+  
 });
 
 router.delete('/:id', (req, res) => {
